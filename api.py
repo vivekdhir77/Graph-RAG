@@ -273,59 +273,55 @@ def generate_visualization(topic):
                 'status': 'not_found'
             }), 404
         
-        # Instead of generating in the Flask thread, use subprocess to run the script
-        import subprocess
-        import sys
-        
-        logger.info(f"Launching generate_visualization.py script for: {topic}")
-        
-        # Build the command - use the same Python executable that's running this Flask app
-        cmd = [sys.executable, "generate_visualization.py", topic]
-        
-        # Run the script as a subprocess and wait for it to complete
-        # The timeout ensures we don't wait forever
+        # Initialize the KnowledgeGraph and generate visualization directly
         try:
-            result = subprocess.run(
-                cmd, 
-                capture_output=True, 
-                text=True, 
-                timeout=60
-            )
+            # Initialize KnowledgeGraph
+            kg = KnowledgeGraph()
             
-            if result.returncode == 0:
-                logger.info(f"Visualization script completed successfully for '{topic}'")
-                
-                # Check if the visualization file exists
-                import os
-                viz_path = os.path.join("graphs", f"{topic.replace(' ', '_')}_viz.png")
-                full_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), viz_path)
-                
-                if os.path.exists(full_path):
-                    logger.info(f"Visualization file confirmed at: {full_path}")
-                    return jsonify({
-                        'success': True,
-                        'message': f"Visualization generated for '{topic}'",
-                        'path': viz_path
-                    })
-                else:
-                    logger.warning(f"Visualization script ran but file not found at: {full_path}")
-                    return jsonify({
-                        'error': f"Visualization script ran but file not found. Check the server logs.",
-                        'stdout': result.stdout,
-                        'stderr': result.stderr
-                    }), 500
-            else:
-                logger.error(f"Visualization script failed with code {result.returncode}: {result.stderr}")
+            # Load the graph
+            kg.load_graph(topic)
+            
+            # Create graphs directory if it doesn't exist
+            graphs_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "graphs")
+            if not os.path.exists(graphs_dir):
+                os.makedirs(graphs_dir)
+            
+            # Generate the visualization
+            viz_path = os.path.join(graphs_dir, f"{topic.replace(' ', '_')}_viz.png")
+            
+            # Call the visualize_graph method directly
+            filename = kg.visualize_graph(topic)
+            
+            # If visualization was generated with a different name, rename it
+            if os.path.exists(filename) and filename != viz_path:
+                os.rename(filename, viz_path)
+                logger.info(f"Renamed visualization from {filename} to {viz_path}")
+            
+            # Close the KnowledgeGraph connection
+            kg.close()
+            
+            # Check if the file exists at the expected location
+            if os.path.exists(viz_path):
+                logger.info(f"Visualization generated successfully at: {viz_path}")
                 return jsonify({
-                    'error': f"Visualization script failed with code {result.returncode}",
-                    'stdout': result.stdout,
-                    'stderr': result.stderr
+                    'success': True,
+                    'message': f"Visualization generated for '{topic}'",
+                    'path': f"graphs/{topic.replace(' ', '_')}_viz.png"
+                })
+            else:
+                logger.warning(f"Visualization file not found at expected path: {viz_path}")
+                return jsonify({
+                    'error': "Visualization was generated but file not found at expected location.",
+                    'status': 'missing_file'
                 }), 500
-        except subprocess.TimeoutExpired:
-            logger.error(f"Visualization script timed out for '{topic}'")
+            
+        except Exception as viz_error:
+            logger.error(f"Error generating visualization: {str(viz_error)}")
+            logger.error(traceback.format_exc())
             return jsonify({
-                'error': "Visualization generation timed out. Try again or run the script manually."
-            }), 504
+                'error': f"Error generating visualization: {str(viz_error)}",
+                'stacktrace': traceback.format_exc()
+            }), 500
             
     except Exception as e:
         logger.error(f"Failed to generate visualization: {str(e)}")

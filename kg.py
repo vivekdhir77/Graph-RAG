@@ -1,3 +1,8 @@
+# Set Matplotlib to use a non-interactive backend before importing anything else
+# This is crucial for web servers where visualizations run in worker threads
+import matplotlib
+matplotlib.use('Agg')  # Use the 'Agg' backend which doesn't require a GUI
+
 import os
 import json
 import requests

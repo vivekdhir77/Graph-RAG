@@ -1,7 +1,12 @@
 # Knowledge Graph RAG System
 
+## Demo Videos & Slides
+- [KG RAG.mov](https://youtu.be/xnz-hfjtzKQ) - Full explanation of the project
+- [knowledge_Graph Building.mov](link-to-video) - Demo of knowledge graph construction for neural networks
+- [Architecture Slides](link-to-pdf) - System architecture diagrams and explanations
+
 ## Overview
-This project is an intelligent research assistant that builds knowledge graphs from web content and allows users to query them using natural language. It combines web search, information extraction, and graph-based reasoning to provide comprehensive answers to complex questions.
+This project is an intelligent research assistant that builds knowledge graphs from web content and allows users to query them using natural language. It combines web search, information extraction, and reasoning to provide comprehensive answers to complex questions.
 
 ## How It Works
 1. **Web Search**: Searches the internet for information on a topic
