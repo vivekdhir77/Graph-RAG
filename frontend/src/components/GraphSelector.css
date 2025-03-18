@@ -1,0 +1,64 @@
+.graph-selector {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.graph-selector h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.graphs-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.graph-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.graph-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.graph-item.selected {
+  border: 2px solid var(--primary-color);
+  background-color: var(--bubble-user);
+}
+
+.graph-item h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.graph-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 14px;
+  color: #666;
+}
+
+.graph-selector.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.graph-selector.empty p {
+  color: #999;
+  font-size: 18px;
+}

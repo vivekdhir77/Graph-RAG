@@ -1,0 +1,123 @@
+.graph-builder {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.graph-builder h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.graph-builder form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.form-group small {
+  color: #777;
+  font-size: 13px;
+}
+
+.graph-builder button {
+  padding: 12px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.graph-builder button:hover {
+  background-color: var(--secondary-color);
+}
+
+.graph-builder button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #d9534f;
+  padding: 10px;
+  border: 1px solid #d9534f;
+  border-radius: 4px;
+  background-color: #f9f2f2;
+}
+
+.progress-message {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid #5bc0de;
+  border-radius: 4px;
+  background-color: #f0f9fd;
+  color: #31708f;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.info-box {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.info-box h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 16px;
+}
+
+.info-box p {
+  margin: 10px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #555;
+}

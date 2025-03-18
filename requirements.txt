@@ -1,0 +1,14 @@
+neo4j
+langchain
+langchain-groq
+langgraph
+requests
+beautifulsoup4
+python-dotenv
+matplotlib
+networkx
+pydantic
+tqdm
+flask
+flask-cors
+matplotlib
