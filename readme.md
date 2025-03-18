@@ -1,7 +1,7 @@
 # Knowledge Graph RAG System
 
 ## Demo Videos & Slides
-[![Knowledge Graph RAG System Demo](https://img.youtube.com/vi/xnz-hfjtzKQ/0.jpg)](https://www.youtube.com/watch?v=xnz-hfjtzKQ "Knowledge Graph RAG System - Full explanation of the project")
+[Watch the Knowledge Graph RAG System Demo on YouTube](https://youtu.be/xnz-hfjtzKQ?si=amXKE2xAVOvHrA6X)
 
 
 - [knowledge_Graph Building.mov](link-to-video) - Demo of knowledge graph construction for neural networks
